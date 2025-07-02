@@ -71,6 +71,7 @@ public class CodegenEngine {
             .put(javaTemplatePath("controller/vo/listReqVO"), javaModuleImplVOFilePath("ListReqVO"))
             .put(javaTemplatePath("controller/vo/respVO"), javaModuleImplVOFilePath("RespVO"))
             .put(javaTemplatePath("controller/vo/saveReqVO"), javaModuleImplVOFilePath("SaveReqVO"))
+            .put(javaTemplatePath("controller/auto_controller"), javaModuleImplAutoControllerFilePath())
             .put(javaTemplatePath("controller/controller"), javaModuleImplControllerFilePath())
             .put(javaTemplatePath("dal/do"),
                     javaModuleImplMainFilePath("dal/dataobject/${table.businessName}/${table.className}DO"))
@@ -540,6 +541,11 @@ public class CodegenEngine {
     private static String javaModuleImplControllerFilePath() {
         return javaModuleFilePath("controller/${sceneEnum.basePackage}/${table.businessName}/" +
                 "${sceneEnum.prefixClass}${table.className}Controller", "server", "main");
+    }
+
+    private static String javaModuleImplAutoControllerFilePath() {
+        return javaModuleFilePath("controller/${sceneEnum.basePackage}/${table.businessName}/" +
+                "${sceneEnum.prefixClass}${table.className}AutoController", "server", "main");
     }
 
     private static String javaModuleImplMainFilePath(String path) {
