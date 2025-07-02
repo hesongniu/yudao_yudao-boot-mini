@@ -76,11 +76,17 @@ public class CodegenEngine {
                     javaModuleImplMainFilePath("dal/dataobject/${table.businessName}/${table.className}DO"))
             .put(javaTemplatePath("dal/do_sub"), // 特殊：主子表专属逻辑
                     javaModuleImplMainFilePath("dal/dataobject/${table.businessName}/${subTable.className}DO"))
+            .put(javaTemplatePath("dal/auto_mapper"),
+                    javaModuleImplMainFilePath("dal/mysql/${table.businessName}/${table.className}AutoMapper"))
             .put(javaTemplatePath("dal/mapper"),
                     javaModuleImplMainFilePath("dal/mysql/${table.businessName}/${table.className}Mapper"))
             .put(javaTemplatePath("dal/mapper_sub"), // 特殊：主子表专属逻辑
                     javaModuleImplMainFilePath("dal/mysql/${table.businessName}/${subTable.className}Mapper"))
             .put(javaTemplatePath("dal/mapper.xml"), mapperXmlFilePath())
+            .put(javaTemplatePath("service/auto_serviceImpl"),
+                    javaModuleImplMainFilePath("service/${table.businessName}/${table.className}AutoServiceImpl"))
+            .put(javaTemplatePath("service/auto_service"),
+                    javaModuleImplMainFilePath("service/${table.businessName}/${table.className}AutoService"))
             .put(javaTemplatePath("service/serviceImpl"),
                     javaModuleImplMainFilePath("service/${table.businessName}/${table.className}ServiceImpl"))
             .put(javaTemplatePath("service/service"),

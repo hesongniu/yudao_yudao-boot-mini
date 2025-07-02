@@ -1,3 +1,4 @@
+//不可修改，重复生成会覆盖
 package ${basePackage}.module.${table.moduleName}.controller.${sceneEnum.basePackage}.${table.businessName}.vo;
 
 import lombok.*;

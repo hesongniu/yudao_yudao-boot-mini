@@ -1,3 +1,4 @@
+//不可修改，重复生成会覆盖
 #set ($subTable = $subTables.get($subIndex))##当前表
 #set ($subColumns = $subJoinColumnsList.get($subIndex))##当前字段数组
 #set ($subJoinColumn = $subJoinColumns.get($subIndex))##当前 join 字段
