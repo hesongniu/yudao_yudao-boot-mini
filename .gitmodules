@@ -1,0 +1,3 @@
+[submodule "yudao-ui-admin-vue3"]
+	path = yudao-ui-admin-vue3
+	url = git@github.com:hesongniu/yudao_yudao-ui-admin-vue3.git
