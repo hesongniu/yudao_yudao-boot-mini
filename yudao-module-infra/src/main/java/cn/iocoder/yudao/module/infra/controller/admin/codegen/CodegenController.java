@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.module.infra.controller.admin.codegen;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ZipUtil;
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
@@ -20,6 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +31,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +43,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserNickname;
 import static cn.iocoder.yudao.module.infra.framework.file.core.utils.FileTypeUtils.writeAttachment;
 
+@Slf4j
 @Tag(name = "管理后台 - 代码生成器")
 @RestController
 @RequestMapping("/infra/codegen")
@@ -139,6 +146,8 @@ public class CodegenController {
                                 HttpServletResponse response) throws IOException {
         // 生成代码
         Map<String, String> codes = codegenService.generationCodes(tableId);
+        //直接写serverCodes
+        writeServerCodes(codes);
         // 构建 zip 包
         String[] paths = codes.keySet().toArray(new String[0]);
         ByteArrayInputStream[] ins = codes.values().stream().map(IoUtil::toUtf8Stream).toArray(ByteArrayInputStream[]::new);
@@ -146,6 +155,28 @@ public class CodegenController {
         ZipUtil.zip(outputStream, paths, ins);
         // 输出
         writeAttachment(response, "codegen.zip", outputStream.toByteArray());
+    }
+
+    /**直接写serverCodes*/
+    void writeServerCodes(Map<String, String> codes){
+        if(CollUtil.isNotEmpty(codes)){
+            String currentDir = System.getProperty("user.dir");
+            codes.forEach((k,v)  -> {
+                try{
+                    if(k.contains("yudao-module")){
+                        Path path = Paths.get(currentDir, k);
+                        if(!Files.exists(path.getParent())){
+                            Files.createDirectory(path.getParent());
+                        }
+                        if(!Files.exists(path) || (Files.exists(path) && v.startsWith("//不可修改"))){
+                            Files.write(path, v.getBytes());
+                        }
+                    }
+                }catch(Exception e){
+                    log.error(e.toString(),e);
+                }
+            });
+        }
     }
 
 }
