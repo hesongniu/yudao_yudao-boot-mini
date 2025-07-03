@@ -51,6 +51,10 @@ public class ContactDO extends BaseDO {
      * 头像
      */
     private String avatar;
+    /**
+     * 扩展信息
+     */
+    private String ext;
 
 
 }
