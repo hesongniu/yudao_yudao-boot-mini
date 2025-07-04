@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @Data
 public class ContactSaveReqVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "736")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "29188")
     private Long id;
 
-    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
+    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
     @NotEmpty(message = "名字不能为空")
     private String name;
 
@@ -36,5 +36,8 @@ public class ContactSaveReqVO {
 
     @Schema(description = "扩展信息")
     private String ext;
+
+    @Schema(description = "备注", example = "随便")
+    private String remark;
 
 }

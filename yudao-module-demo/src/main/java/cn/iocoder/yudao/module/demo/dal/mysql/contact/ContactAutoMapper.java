@@ -25,7 +25,8 @@ public interface ContactAutoMapper extends BaseMapperX<ContactDO> {
                 .eqIfPresent(ContactDO::getDescription, reqVO.getDescription())
                 .eqIfPresent(ContactDO::getAvatar, reqVO.getAvatar())
                 .betweenIfPresent(ContactDO::getCreateTime, reqVO.getCreateTime())
-                .likeIfPresent(ContactDO::getExt, reqVO.getExt())
+                .eqIfPresent(ContactDO::getExt, reqVO.getExt())
+                .eqIfPresent(ContactDO::getRemark, reqVO.getRemark())
                 .orderByDesc(ContactDO::getId));
     }
 

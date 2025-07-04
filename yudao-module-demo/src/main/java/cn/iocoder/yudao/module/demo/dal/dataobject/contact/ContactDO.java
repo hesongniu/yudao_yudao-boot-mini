@@ -55,6 +55,10 @@ public class ContactDO extends BaseDO {
      * 扩展信息
      */
     private String ext;
+    /**
+     * 备注
+     */
+    private String remark;
 
 
 }

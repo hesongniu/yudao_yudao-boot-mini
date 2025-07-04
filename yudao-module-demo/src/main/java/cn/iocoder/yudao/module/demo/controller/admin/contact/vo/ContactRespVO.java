@@ -15,11 +15,11 @@ import cn.iocoder.yudao.framework.excel.core.convert.DictConvert;
 @ExcelIgnoreUnannotated
 public class ContactRespVO {
 
-    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "736")
+    @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "29188")
     @ExcelProperty("编号")
     private Long id;
 
-    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
+    @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
     @ExcelProperty("名字")
     private String name;
 
@@ -47,5 +47,9 @@ public class ContactRespVO {
     @Schema(description = "扩展信息")
     @ExcelProperty("扩展信息")
     private String ext;
+
+    @Schema(description = "备注", example = "随便")
+    @ExcelProperty("备注")
+    private String remark;
 
 }

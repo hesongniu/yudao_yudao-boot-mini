@@ -14,7 +14,7 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class ContactPageReqVO extends PageParam {
 
-    @Schema(description = "名字", example = "李四")
+    @Schema(description = "名字", example = "芋艿")
     private String name;
 
     @Schema(description = "性别")
@@ -35,5 +35,8 @@ public class ContactPageReqVO extends PageParam {
 
     @Schema(description = "扩展信息")
     private String ext;
+
+    @Schema(description = "备注", example = "随便")
+    private String remark;
 
 }
