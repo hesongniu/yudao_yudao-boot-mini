@@ -163,13 +163,29 @@ public class CodegenController {
             String currentDir = System.getProperty("user.dir");
             codes.forEach((k,v)  -> {
                 try{
-                    if(k.contains("yudao-module")){
+                    if(k.startsWith("yudao-module")){
                         Path path = Paths.get(currentDir, k);
                         if(!Files.exists(path.getParent())){
                             Files.createDirectory(path.getParent());
                         }
                         if(!Files.exists(path) || (Files.exists(path) && v.startsWith("//不可修改"))){
                             Files.write(path, v.getBytes());
+                        }
+                    } else if (k.startsWith("sql")) {
+                        Path path = Paths.get(currentDir, k);
+                        if(Files.exists(path.getParent())){
+                            Files.write(path, v.getBytes());
+                        }else{
+                            log.error("path {} not exist!", path);
+                        }
+                    } else if (k.startsWith("yudao-ui")) {
+                        //取父级目录
+                        Path currentPath = Paths.get(currentDir);
+                        Path path = Paths.get(currentPath.getParent().toString(), k);
+                        if(Files.exists(path.getParent())){
+                            Files.write(path, v.getBytes());
+                        }else{
+                            log.error("path {} not exist!", path);
                         }
                     }
                 }catch(Exception e){
